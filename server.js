@@ -1,7 +1,7 @@
 var express = require('express');
 var app     = express();
 var path = require("path");
-var queires=require('./mysql/mysqlqueries.js');
+var queires=require('./mysqlqueries.js');
 queires(app)
 
 app.use(express.static(path.join(__dirname, 'public')));
