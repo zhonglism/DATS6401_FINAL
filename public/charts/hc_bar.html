@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Highcharts Bar Charts</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+<body>
+
+	<div id="container" style="min-width: 600px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+
+ 	<script type="text/javascript">
+	 	var options = {
+	    chart: {
+	        renderTo: 'container',
+	        defaultSeriesType: 'column'
+	    },
+	    title: {
+	        text: 'The Count of Three Species'
+	    },
+	    xAxis: {
+	        categories: [],
+	        title:{
+	        	text:"Species"
+	        }
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Count'
+	        }
+	    },
+	    series: []
+	};
+ 	$.get('/../data/hc_bar.csv', function(data) {
+    // Split the lines
+    var lines = data.split('\n');
+    // console.log(lines)
+    // Iterate over the lines and add categories or series
+    $.each(lines, function(lineNo, line) {
+        var items = line.split(',');
+        
+        // header line containes categories
+        if (lineNo == 0) {
+            $.each(items, function(itemNo, item) {
+                if (itemNo > 0)  options.xAxis.categories.push(item);
+            });
+        }
+        
+        // the rest of the lines contain data with their name in the first 
+        // position
+        else {
+            var series = {
+                data: []
+            };
+            $.each(items, function(itemNo, item) {
+                if (itemNo == 0) {
+                    series.name = item;
+                } else {
+                    series.data.push(parseFloat(item));
+                }
+            });
+            
+            options.series.push(series);
+    
+        }
+        
+    });
+    
+    // Create the chart
+	    var chart = new Highcharts.Chart(options);
+	});
+ 	</script>
+
+</body>
+</html>
