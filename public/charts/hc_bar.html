@@ -11,67 +11,88 @@
 <body>
 
 	<div id="container" style="min-width: 600px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+	<script type="text/javascript" src=./jsfiles/hc_bar.js></script>
+<!-- 	<script type="text/javascript">
 
+		Highcharts.chart('container', {
+
+		    chart: {
+		        polar: true,
+		        type: 'line'
+		    },
+
+		    title: {
+		        text: 'Budget vs spending',
+		        x: -80
+		    },
+
+		    pane: {
+		        size: '80%'
+		    },
+
+		    xAxis: {
+		        categories: ['Sales', 'Marketing', 'Development', 'Customer Support',
+		                'Information Technology', 'Administration'],
+		        tickmarkPlacement: 'on',
+		        lineWidth: 0
+		    },
+
+		    yAxis: {
+		        gridLineInterpolation: 'polygon',
+		        lineWidth: 0,
+		        min: 0
+		    },
+
+		    tooltip: {
+		        shared: true,
+		        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+		    },
+
+		    legend: {
+		        align: 'right',
+		        verticalAlign: 'top',
+		        y: 70,
+		        layout: 'vertical'
+		    },
+
+		    series: [{
+		        name: 'Allocated Budget',
+		        data: [43000, 19000, 60000, 35000, 17000, 10000],
+		        pointPlacement: 'on'
+		    }, {
+		        name: 'Actual Spending',
+		        data: [50000, 39000, 42000, 31000, 26000, 14000],
+		        pointPlacement: 'on'
+		    }]
+
+		});
+	</script> -->
+
+
+<!-- 	<script type="text/javascript">
+		$.get('file.csv', function(csv) {
+			// console.log(csv);
+			console.log(csv.count);
+		    $('#container').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        data: {
+		            csv: csv
+		        },
+		        title: {
+		            text: 'Fruit Consumption'
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Units'
+		            }
+		        }
+		    });
+		});
+	</script>
+ -->
  	<script type="text/javascript">
-	 	var options = {
-	    chart: {
-	        renderTo: 'container',
-	        defaultSeriesType: 'column'
-	    },
-	    title: {
-	        text: 'The Count of Three Species'
-	    },
-	    xAxis: {
-	        categories: [],
-	        title:{
-	        	text:"Species"
-	        }
-	    },
-	    yAxis: {
-	        title: {
-	            text: 'Count'
-	        }
-	    },
-	    series: []
-	};
- 	$.get('/../data/hc_bar.csv', function(data) {
-    // Split the lines
-    var lines = data.split('\n');
-    // console.log(lines)
-    // Iterate over the lines and add categories or series
-    $.each(lines, function(lineNo, line) {
-        var items = line.split(',');
-        
-        // header line containes categories
-        if (lineNo == 0) {
-            $.each(items, function(itemNo, item) {
-                if (itemNo > 0)  options.xAxis.categories.push(item);
-            });
-        }
-        
-        // the rest of the lines contain data with their name in the first 
-        // position
-        else {
-            var series = {
-                data: []
-            };
-            $.each(items, function(itemNo, item) {
-                if (itemNo == 0) {
-                    series.name = item;
-                } else {
-                    series.data.push(parseFloat(item));
-                }
-            });
-            
-            options.series.push(series);
-    
-        }
-        
-    });
-    
-    // Create the chart
-	    var chart = new Highcharts.Chart(options);
-	});
  	</script>
 
 </body>
