@@ -9,11 +9,11 @@ module.exports=function(app){
 	app.get('/', function (req, res) {
 
 		var connection = mysql.createConnection({
-		  host:'',
+		  host:'dats6401.cafhuzodl3af.us-east-1.rds.amazonaws.com',
 		  port:'3306',
 		  user:'chen_chunxu',
 		  password:'',
-		  database:''
+		  database:'dats6401_final'
 		});
 
 		connection.connect(function(err){
